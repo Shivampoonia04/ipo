@@ -1,0 +1,474 @@
+{
+  "info": {
+    "name": "IPO Platform API",
+    "description": "Complete REST API for IPO Platform with authentication, CRUD operations, file uploads, and admin functions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "auth_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Admin Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@ipo-platform.com\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": "{{base_url}}/api/auth/login"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    pm.collectionVariables.set('auth_token', response.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": "{{base_url}}/api/auth/me"
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": "{{base_url}}/api/auth/logout"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Companies",
+      "item": [
+        {
+          "name": "Get All Companies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/companies?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "companies"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Company by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/companies/1"
+          }
+        },
+        {
+          "name": "Create Company",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"TechCorp Solutions\",\n  \"description\": \"Leading technology solutions provider\",\n  \"sector\": \"Technology\",\n  \"website\": \"https://techcorp.com\",\n  \"foundedYear\": 2010,\n  \"headquarters\": \"San Francisco, CA\"\n}"
+            },
+            "url": "{{base_url}}/api/companies"
+          }
+        },
+        {
+          "name": "Update Company",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"TechCorp Solutions Updated\",\n  \"description\": \"Updated description\",\n  \"sector\": \"Technology\"\n}"
+            },
+            "url": "{{base_url}}/api/companies/1"
+          }
+        },
+        {
+          "name": "Delete Company",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": "{{base_url}}/api/companies/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "IPOs",
+      "item": [
+        {
+          "name": "Get All IPOs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ipos?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ipos"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search IPOs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ipos/search?q=tech&limit=5",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ipos", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "tech"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get IPO by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/ipos/1"
+          }
+        },
+        {
+          "name": "Create IPO",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"companyId\": 1,\n  \"ipoName\": \"TechCorp IPO 2024\",\n  \"openDate\": \"2024-03-01T00:00:00.000Z\",\n  \"closeDate\": \"2024-03-05T00:00:00.000Z\",\n  \"priceRange\": \"$50-$60\",\n  \"lotSize\": 100,\n  \"totalShares\": 1000000,\n  \"issueSize\": 55000000,\n  \"faceValue\": 10,\n  \"exchange\": \"NSE\",\n  \"registrar\": \"Link Intime\",\n  \"leadManager\": \"Morgan Stanley\",\n  \"description\": \"Initial public offering of TechCorp Solutions\"\n}"
+            },
+            "url": "{{base_url}}/api/ipos"
+          }
+        },
+        {
+          "name": "Update IPO",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"priceRange\": \"$55-$65\",\n  \"status\": \"open\"\n}"
+            },
+            "url": "{{base_url}}/api/ipos/1"
+          }
+        },
+        {
+          "name": "Delete IPO",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": "{{base_url}}/api/ipos/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Documents",
+      "item": [
+        {
+          "name": "Upload RHP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "rhp",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": "{{base_url}}/api/documents/1/upload/rhp"
+          }
+        },
+        {
+          "name": "Upload DRHP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "drhp",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": "{{base_url}}/api/documents/1/upload/drhp"
+          }
+        },
+        {
+          "name": "Upload Prospectus",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "prospectus",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": "{{base_url}}/api/documents/1/upload/prospectus"
+          }
+        },
+        {
+          "name": "Download RHP",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/documents/1/download/rhp"
+          }
+        },
+        {
+          "name": "Download DRHP",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/documents/1/download/drhp"
+          }
+        },
+        {
+          "name": "Download Prospectus",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/documents/1/download/prospectus"
+          }
+        },
+        {
+          "name": "Delete Document",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"documentType\": \"rhp\"\n}"
+            },
+            "url": "{{base_url}}/api/documents/1/delete-doc"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get Dashboard Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": "{{base_url}}/api/admin/stats"
+          }
+        },
+        {
+          "name": "Get Activity Logs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/admin/logs?page=1&limit=20",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "logs"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "System Health",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": "{{base_url}}/api/admin/health"
+          }
+        }
+      ]
+    },
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/health"
+          }
+        }
+      ]
+    }
+  ]
+}
