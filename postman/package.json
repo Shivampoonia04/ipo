@@ -1,0 +1,40 @@
+{
+  "name": "ipo-platform-postman-tests",
+  "version": "1.0.0",
+  "description": "Postman API testing suite for IPO Platform",
+  "main": "run-tests.js",
+  "scripts": {
+    "test": "node run-tests.js",
+    "test:manual": "newman run ./IPO-API.postman_collection.json -e ./IPO-Platform-Environment.postman_environment.json",
+    "test:html": "newman run ./IPO-API.postman_collection.json -e ./IPO-Platform-Environment.postman_environment.json --reporters html --reporter-html-export ./reports/report.html",
+    "test:json": "newman run ./IPO-API.postman_collection.json -e ./IPO-Platform-Environment.postman_environment.json --reporters json --reporter-json-export ./reports/report.json",
+    "install:newman": "npm install -g newman",
+    "setup": "npm run install:newman && mkdir -p reports"
+  },
+  "keywords": [
+    "postman",
+    "api-testing",
+    "newman",
+    "ipo-platform",
+    "automation"
+  ],
+  "author": "IPO Platform Team",
+  "license": "MIT",
+  "devDependencies": {
+    "newman": "^5.3.2",
+    "newman-reporter-html": "^1.0.5",
+    "newman-reporter-json": "^1.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/ipo-platform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/ipo-platform/issues"
+  },
+  "homepage": "https://github.com/your-org/ipo-platform#readme"
+} 

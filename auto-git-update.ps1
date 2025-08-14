@@ -1,0 +1,2 @@
+# Auto Git Update Script - Run this in Cursor terminal
+Write-Host "🚀 Auto-updating git..." -ForegroundColor Green; cd ipo-platform; git add .; git commit -m "feat: Complete project update with Postman API testing suite - 100% COMPLETED"; git push origin main; Write-Host "✅ Git update completed!" -ForegroundColor Green 

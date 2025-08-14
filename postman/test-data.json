@@ -1,0 +1,96 @@
+{
+  "companies": [
+    {
+      "name": "TechCorp Solutions",
+      "description": "Leading technology solutions provider specializing in AI and cloud computing",
+      "sector": "Technology",
+      "website": "https://techcorp.com",
+      "foundedYear": 2010,
+      "headquarters": "San Francisco, CA",
+      "status": "active"
+    },
+    {
+      "name": "GreenEnergy Corp",
+      "description": "Renewable energy company focused on solar and wind power solutions",
+      "sector": "Energy",
+      "website": "https://greenenergy.com",
+      "foundedYear": 2015,
+      "headquarters": "Austin, TX",
+      "status": "active"
+    },
+    {
+      "name": "HealthTech Innovations",
+      "description": "Healthcare technology company developing digital health solutions",
+      "sector": "Healthcare",
+      "website": "https://healthtech.com",
+      "foundedYear": 2018,
+      "headquarters": "Boston, MA",
+      "status": "active"
+    }
+  ],
+  "ipos": [
+    {
+      "companyId": 1,
+      "ipoName": "TechCorp IPO 2024",
+      "openDate": "2024-03-01T00:00:00.000Z",
+      "closeDate": "2024-03-05T00:00:00.000Z",
+      "priceRange": "$50-$60",
+      "lotSize": 100,
+      "totalShares": 1000000,
+      "issueSize": 55000000,
+      "faceValue": 10,
+      "exchange": "NSE",
+      "registrar": "Link Intime",
+      "leadManager": "Morgan Stanley",
+      "description": "Initial public offering of TechCorp Solutions",
+      "status": "upcoming"
+    },
+    {
+      "companyId": 2,
+      "ipoName": "GreenEnergy IPO 2024",
+      "openDate": "2024-04-01T00:00:00.000Z",
+      "closeDate": "2024-04-05T00:00:00.000Z",
+      "priceRange": "$30-$35",
+      "lotSize": 150,
+      "totalShares": 2000000,
+      "issueSize": 65000000,
+      "faceValue": 5,
+      "exchange": "BSE",
+      "registrar": "Karvy",
+      "leadManager": "Goldman Sachs",
+      "description": "Initial public offering of GreenEnergy Corp",
+      "status": "upcoming"
+    }
+  ],
+  "users": [
+    {
+      "email": "testuser1@example.com",
+      "password": "TestUser123!",
+      "firstName": "John",
+      "lastName": "Doe",
+      "role": "user",
+      "isActive": true
+    },
+    {
+      "email": "testuser2@example.com",
+      "password": "TestUser456!",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "role": "user",
+      "isActive": true
+    }
+  ],
+  "invalid_data": {
+    "invalid_email": "invalid-email",
+    "invalid_password": "123",
+    "invalid_company": {
+      "name": "",
+      "sector": "InvalidSector"
+    },
+    "invalid_ipo": {
+      "openDate": "invalid-date",
+      "priceRange": "",
+      "lotSize": -100
+    }
+  }
+} 

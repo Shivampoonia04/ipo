@@ -1,0 +1,8 @@
+# Copy and paste these commands into your Cursor terminal:
+
+cd ipo-platform
+git add .
+git commit -m "feat: Complete project update with Postman API testing suite - 100% COMPLETED"
+git push origin main
+
+# That's it! Your project will be updated automatically. 
